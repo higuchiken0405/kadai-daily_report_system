@@ -22,25 +22,30 @@ public class EmployeesDestroyServlet extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	    //パラメータからトークンを取得
 	    String _token = request.getParameter("_token");
 	    if(_token != null && _token.equals(request.getSession().getId())) {
-
+	        //トークンがあり、セッションIDと等しい場合
+	        //エンティティマネージャの生成
 	        EntityManager em = DBUtil.createEntityManager();
-
+	        //セッションから取得したEmployeeのIDの値で検索した結果を格納
 	        Employee e = em.find(Employee.class, (Integer) request.getSession().getAttribute("employee_id"));
-	        e.setDelete_flag(1);
-	        e.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 
+	        //削除済みフラグを立てる
+	        e.setDelete_flag(1);
+	        //現在日時を取得し、更新日時にセット
+	        e.setUpdated_at(new Timestamp(System.currentTimeMillis()));
+	        //トランザクションの開始
 	        em.getTransaction().begin();
+	        //トランザクションのコミット
 	        em.getTransaction().commit();
+	        //エンティティマネージャの終了
 	        em.close();
 
+	        //フラッシュメッセージをセッションに保存
 	        request.getSession().setAttribute("flush", "削除が完了しました。");
-
+	        //indexにリダイレクト
 	        response.sendRedirect(request.getContextPath() + "/employees/index");
-
-
 	    }
 
 

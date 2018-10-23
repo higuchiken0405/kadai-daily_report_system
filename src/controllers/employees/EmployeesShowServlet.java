@@ -22,22 +22,18 @@ public class EmployeesShowServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	    //エンティティマネージャの生成
         EntityManager em = DBUtil.createEntityManager();
-
+        //パラメータから取得したIDで検索した結果を格納
         Employee e = em.find(Employee.class, Integer.parseInt(request.getParameter("id")));
-
+        //エンティティマネージャを終了
         em.close();
-
+        //検索結果をJSPに渡す
         request.setAttribute("employee", e);
+        //セッションIDをトークンとしてJSPに渡す
         request.setAttribute("_token", request.getSession().getId());
-
+        //show.jspに移動
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/show.jsp");
         rd.forward(request, response);
-
-
-
 	}
-
-
 }

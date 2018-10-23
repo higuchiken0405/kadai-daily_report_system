@@ -7,6 +7,7 @@ import javax.xml.bind.DatatypeConverter;
 
 public class EncryptUtil {
 
+    //パスワードを暗号化するメソッド
     public static String getPasswordEncrypt(String plain_p, String salt) {
         String ret = "";
 

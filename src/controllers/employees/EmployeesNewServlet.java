@@ -20,12 +20,12 @@ public class EmployeesNewServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	    //セッションIDをトークンとしてJSPに渡す
         request.setAttribute("_token", request.getSession().getId());
+        //EmployeeインスタンスをJSPに渡す
         request.setAttribute("employee", new Employee());
-
+        //new.jspに移動
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/new.jsp");
         rd.forward(request, response);
     }
-
 }
