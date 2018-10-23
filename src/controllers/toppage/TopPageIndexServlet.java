@@ -19,6 +19,13 @@ public class TopPageIndexServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	    if(request.getSession().getAttribute("fliush") != null) {
+	        //セッションにフラッシュメッセージがある場合、
+	        //セッションから取得したフラッシュメッセージをJSPに渡す
+	        request.setAttribute("flush", request.getSession().getAttribute("flush"));
+	        //セッションのフラッシュメッセージを削除
+	        request.getSession().removeAttribute("flush");
+	    }
 	    //index.jspに移動
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/index.jsp");
         rd.forward(request, response);
