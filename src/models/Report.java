@@ -24,7 +24,7 @@ import javax.persistence.Table;
             ),
     @NamedQuery (
             //日報の全データ数を取得
-            name="getReportCount",
+            name="getReportsCount",
             query="SELECT COUNT(r) FROM Report  AS r"
             )
 })
