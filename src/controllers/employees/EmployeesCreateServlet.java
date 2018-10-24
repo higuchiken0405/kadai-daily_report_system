@@ -36,15 +36,18 @@ public class EmployeesCreateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
             //Employeeクラスのインスタンス化
 	        Employee e = new Employee();
-	        //パラメータから取得した社員番号、氏名、パスワード、管理者権限をセット
+	        //パラメータから取得した社員番号、氏名、パスワード(暗号化)、管理者権限をセット
 	        e.setCode(request.getParameter("code"));
 	        e.setName(request.getParameter("name"));
 	        e.setPassword(
 	                EncryptUtil.getPasswordEncrypt(
+	                        //パラメータから取得したパスワードを取得
 	                        request.getParameter("password"),
+	                        //サーブレットコンテナにあるソルトを取得、
 	                        (String)this.getServletContext().getAttribute("salt")
 	                        )
 	                );
+	        //パラメータから取得した管理者権限フラグをセット
 	        e.setAdmin_flag(Integer.parseInt(request.getParameter("admin_flag")));
 	        //現在時刻を取得し、作成日時・更新日時にセット
 	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
