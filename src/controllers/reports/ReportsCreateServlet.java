@@ -47,7 +47,7 @@ public class ReportsCreateServlet extends HttpServlet {
             //パラメータから取得した日報の日付を取得
 	        String rd_str = request.getParameter("report_date");
 	        if(rd_str != null && !rd_str.equals("")) {
-	            //パラメータの日付がnull　または　空出ない時
+	            //パラメータの日付がnull　または　空ではない時
 	            //パラメータの日付を格納(String型からDate型へ)
 	            report_date = Date.valueOf(request.getParameter("report_date"));
 	        }

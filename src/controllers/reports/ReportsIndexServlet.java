@@ -45,7 +45,7 @@ public class ReportsIndexServlet extends HttpServlet {
 	    //エンティティマネージャを終了
 	    em.close();
 	    //日報の全データ、全データ数、ページ番号をJSPに渡す
-	    request.setAttribute("repots", reports);
+	    request.setAttribute("reports", reports);
 	    request.setAttribute("reports_count", reports_count);
 	    request.setAttribute("page", page);
 
