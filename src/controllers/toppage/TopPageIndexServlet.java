@@ -57,7 +57,7 @@ public class TopPageIndexServlet extends HttpServlet {
 	    request.setAttribute("reports_count", reports_count);
 	    request.setAttribute("page", page);
 
-	    if(request.getSession().getAttribute("fliush") != null) {
+	    if(request.getSession().getAttribute("flush") != null) {
 	        //セッションにフラッシュメッセージがある場合、
 	        //セッションから取得したフラッシュメッセージをJSPに渡す
 	        request.setAttribute("flush", request.getSession().getAttribute("flush"));
